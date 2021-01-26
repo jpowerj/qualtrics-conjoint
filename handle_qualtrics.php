@@ -1,17 +1,28 @@
 <?php
 
-// Hooray for PHP totally working like a normal language
+///// PHP internal stuff, no need to change this
+// (Hooray for PHP totally working like a normal language :|)
 date_default_timezone_set('America/New_York');
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 ini_set('log_errors', true);
 ini_set('error_log',"/home/bitnami/php_errors.log");
-
 // Required for currency formatting
 setlocale(LC_MONETARY, 'en_US.UTF-8');
 
-// (Default value)
+$GLOBALS["characteristics"] = array(
+    "jobtitle" => ["Cashier & Front End", "Sales Associate", "Cart Attendant & Janitorial",
+    "Stocker, Backroom, & Receiving", "Fresh Food Associate", "Asset Protection",
+    "Automotive", "Pharmacy", "Vision", "Department Manager", "Remodel Associate"],
+    ""
+);
+$GLOBALS["jobtitle_opts"] = ;
+
+// (You could set default values for each variable here. As it's set up
+// right now all the default values are just NULL. But writing it like
+// this ensures that all the variables get created even if the value isn't
+// received from Qualtrics for whatever reason)
 $user_jobtitle = NULL;
 if(isset($_POST['entered_jobtitle'])) {
     $user_jobtitle = $_POST['entered_jobtitle'];
@@ -64,7 +75,6 @@ $user_newskills = NULL;
 if(isset($_POST['entered_newskills'])) {
     $user_newskills = $_POST["entered_newskills"];
 }
-
 // User metadata
 // Postal
 $user_postal = NULL;
@@ -91,8 +101,8 @@ if(isset($_POST['user_country'])){
 //error_log("Country: " . $user_country . "\n");
 
 ///// Debugging zone :3
-$post_str = var_export($_POST, true);
-error_log($post_str);
+//$post_str = var_export($_POST, true);
+//error_log($post_str);
 //$log_str = "Query String: " . $_SERVER['QUERY_STRING'] . "\n";
 //$log_str = $log_str . "Entered Hours: " . $user_hours . "\n";
 // Save it to a file real quick
@@ -163,9 +173,7 @@ function generateGaussian($mu, $sigma){
 	   return($z0 * $sigma + $mu);
 }
 
-$GLOBALS["jobtitle_opts"] = ["Cashier & Front End", "Sales Associate", "Cart Attendant & Janitorial",
-                             "Stocker, Backroom, & Receiving", "Fresh Food Associate", "Asset Protection",
-                             "Automotive", "Pharmacy", "Vision", "Department Manager", "Remodel Associate"];
+
 function processJobTitle($jobtitle){
     $offer1 = $jobtitle;
     $offer2 = $jobtitle;
