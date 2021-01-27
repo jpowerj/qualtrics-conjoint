@@ -13,11 +13,14 @@ setlocale(LC_MONETARY, 'en_US.UTF-8');
 
 $GLOBALS["characteristics"] = array(
     "jobtitle" => ["Cashier & Front End", "Sales Associate", "Cart Attendant & Janitorial",
-    "Stocker, Backroom, & Receiving", "Fresh Food Associate", "Asset Protection",
-    "Automotive", "Pharmacy", "Vision", "Department Manager", "Remodel Associate"],
-    ""
+        "Stocker, Backroom, & Receiving", "Fresh Food Associate", "Asset Protection",
+        "Automotive", "Pharmacy", "Vision", "Department Manager", "Remodel Associate"],
+    "hrs" => ["20 hours or less", "20-40 hours", "40 hours or more"],
+    "controlhrs" => ["Yes", "No"],
+    "friends" => ["None", "Some", "Many", "All"],
+    "commute" => ["0-15 minutes", "15-30 minutes", "30-60 minutes", "More than 60 minutes"],
+    "physical" => ["Yes","No"];
 );
-$GLOBALS["jobtitle_opts"] = ;
 
 // (You could set default values for each variable here. As it's set up
 // right now all the default values are just NULL. But writing it like
@@ -244,7 +247,7 @@ function processWage($entered_wage_str){
     //echo json_encode($output_arr);
 }
 
-$GLOBALS["hrs_opts"] = array("20 hours or less" => 20, "20-40 hours" => 30, "40 hours or more" => 40);
+
 function genOfferHrs($cur_hrs){
     $hrs_opts_keys = array_keys($GLOBALS["hrs_opts"]);
     $offer_hrs_str = randomFromAll($hrs_opts_keys, $cur_hrs);
@@ -294,7 +297,6 @@ function computeSalaries($wage_arr, $hrs_arr){
                  "offer3_salary_num" => $offer3_salary["salary_num"], "offer3_salary_str" => $offer3_salary["salary_str"]));
 }
 
-$GLOBALS["controlhrs_opts"] = ["Yes", "No"];
 function processControlHrs($controlhrs){
     $offer1_controlhrs = $controlhrs;
     $offer2_controlhrs = $controlhrs;
@@ -314,7 +316,6 @@ function processControlHrs($controlhrs){
                  "offer3_controlhrs" => $offer3_controlhrs, "offer3_controlhrs_diff" => $offer3_diff));
 }
 
-$GLOBALS["friends_opts"] = ["None", "Some", "Many", "All"];
 function processFriends($friends){
     $offer1_friends = $friends;
     $offer2_friends = $friends;
@@ -333,7 +334,6 @@ function processFriends($friends){
                  "offer3_friends" => $offer3_friends, "offer3_friends_diff" => $offer3_diff));
 }
 
-$GLOBALS["commute_opts"] = ["0-15 minutes", "15-30 minutes", "30-60 minutes", "More than 60 minutes"];
 function processCommute($commute){
     $offer1_commute = $commute;
     $offer2_commute = $commute;
@@ -352,7 +352,6 @@ function processCommute($commute){
                  "offer3_commute" => $offer3_commute, "offer3_commute_diff" => $offer3_diff));
 }
 
-$GLOBALS["physical_opts"] = ["Yes","No"];
 function processPhysical($physical){
     $offer1_physical = $physical;
     $offer2_physical = $physical;
