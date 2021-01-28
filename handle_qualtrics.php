@@ -236,7 +236,13 @@ for ($i = 0; $i < $num_chars; $i++) {
 }
 
 // For debugging
-$GLOBALS["r"]["debug"] = var_export($GLOBALS["r"], true);
+$debug = false;
+if (isset($_POST["debug"])) {
+    $debug = $_POST["debug"];
+}
+if ($debug) {
+    $GLOBALS["r"]["debug"] = var_export($GLOBALS["r"], true);
+}
 
 // And now we encode everything as JSON and echo it back to Qualtrics
 // Generate JSON-format response

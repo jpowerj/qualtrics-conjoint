@@ -1,5 +1,9 @@
 ## PHP script for running conjoint experiments via Qualtrics
 
+**Demo server: [https://jjacobs.info/handle_qualtrics.php](https://jjacobs.info/handle_qualtrics.php)**
+
+**Demo survey implementation: [https://cumc.co1.qualtrics.com/jfe/form/SV_3WM8qu26hqannYW](https://cumc.co1.qualtrics.com/jfe/form/SV_3WM8qu26hqannYW)**
+
 NOTE BEFORE ALL THIS: Qualtrics does an annoying thing with the data it collects, where if you change the wording of a question even a little bit after you've already published it, it treats all responses to the previously-worded version as in the "trash bin", so you have to do some work to go and re-include that data in the final dataset. Because of this, I highly recommend just duplicating the survey if you want to make a change, and calling the new one version 2, version 3, etc. (since the variables it generates when calling web services can be kind of dauntingly-named to begin with)
 
 1. **Setting up the server** (The hard part) You'll need a PHP-enabled web server on which the .php script will live. For example, I just put it in the `public_html` subfolder of my home folder on the Textlab server, so that the URL to access it was https://textlab.econ.columbia.edu/~jjacobs/handle_qualtrics.php. If you don't have access to a server like this, there are ways to host .php scripts for free (like Heroku) that I'm happy to show yall.
