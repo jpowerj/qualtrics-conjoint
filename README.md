@@ -64,11 +64,11 @@ NOTE BEFORE ALL THIS: Qualtrics does an annoying thing with the data it collects
 
 3. **Naming the user-entered values in Qualtrics Flow Editor** The first step once you have the Qualtrics page open is to click "Flow" at the top of the survey editor. In this first Set Embedded Data block I'm just giving explicit names like `wm_entered_jobtitle` to the responses given to the survey questions up to that point, so that I can use these names across the remainder of the survey flow. This is the final product, but while setting this up it should provide you with menus that you can use to scroll through and select the correct question (e.g., the job title question here has id QID25, but I found that by just scrolling through the list of questions until I found the one that mentioned job title).
 
-    ![00_set_embedded.png](00_set_embedded.png)
+    ![00_set_embedded.png](img/00_set_embedded.png)
 
 4. **Setting up the Web Service call in Qualtrics Flow Editor**: Next you'll need to create a Web Service call block and (importantly) specify every variable from the survey that you want to send to the .php script. In this case, I'm mostly just sending the variables I created in the previous step, though I also include `which_job = wm` since we had it set up to generate two different types of jobs (Walmart and non-Walmart), so that told the .php script which type to generate. *Important*: you'll need to make sure that the variables you send to the .php script (besides `which_job`, which you don't need to worry about sending) are all of the form `entered_<characteristic name>`, where `<characteristic name>` is one of the keys in the array at the top of the .php script (in the example from step 2, therefore, you'd need `entered_A`, `entered_B`, and `entered_C`)
 
-    ![01_send_to_web_service.png](01_send_to_web_service.png)
+    ![01_send_to_web_service.png](img/01_send_to_web_service.png)
 
 5. **Telling Qualtrics how to handle the generated values**: Next, you'll need to specify what Qualtrics should call the variables it receives *back* from the .php script as a response. This part requires a bit of an in-depth explanation: we were randomizing absolutely everything, including the order in which the characteristics showed up (randomized row order), so the way it's set up now is there are just a ton of variables called `name_o1_r01`, `cur_o1_r01`, `val_o1_r01`; `name_o1_r02`, `cur_o1_r02`, `val_o1_r02`, and so on.
 
@@ -79,17 +79,17 @@ NOTE BEFORE ALL THIS: Qualtrics does an annoying thing with the data it collects
 
     Since we had 6 job offers with 12 characteristics each, it was laborious, but in the end we had 4x6x12=288 different variables that the .php script returned, that we then assigned to Qualtrics variables using this schema:
 
-    ![02_receive_from_web_service.png](02_receive_from_web_service.png)
+    ![02_receive_from_web_service.png](img/02_receive_from_web_service.png)
 
     Note that while the `<varname>_o<N>_r<M>` variables are pretty unwieldy and not very human-readable, the server also generates human-readable variables like `generated_wage`, `generated_commute`, and so on, so you should also save these into Qualtrics embedded data fields like so:
 
-    ![02b_human_readable.png](02b_human_readable.png)
+    ![02b_human_readable.png](img/02b_human_readable.png)
 
     This will make your life much easier when downloading and analyzing the final dataset (see step 7 below).
 
 6. **Displaying the generated values in a conjoint table**: Once you've finished this mapping from variables returned by the .php script to variables in Qualtrics, you can use them on any subsequent page! I'm also including the HTML code for the tables we generated here, in `table_code.html`, so you can see what that looks like, since it's a bit of a weird fusion of HTML code and Qualtrics-specific variable reference code. The table as it's set up there will look weird in the preview -- it will look like there are headers on both the left side and above each row -- but that's because it's set up to be responsive, meaning that if someone is viewing the survey on mobile it will auto-adjust the table setup so that they don't have to scroll left to right on their phone. (If you don't want to worry about the responsiveness, though, you can just make a basic standard HTML table) Notice that the notation `${e://Field/<variable name>}` just tells Qualtrics "replace this with whatever is in the embedded data field called `<variable name>`".
 
-    ![03_conjoint_table.png](03_conjoint_table.png)
+    ![03_conjoint_table.png](img/03_conjoint_table.png)
 
     (By the way, I have code that highlights all rows where the offered job value differs from the current job value, if that's useful. I just didn't include it here because it's kind of hackish/makes the code look more convoluted. Let me know if you want me to add this back in)
 
