@@ -101,15 +101,8 @@ function randomContinuousUnif($entered_val, $radius, $prepend_str) {
     return $generated_str;
 }
 
-// Created as a "drop-in" so we can easily switch between randomFromAll
-// and randomFromRemaining, hence the unused 2nd arg
-function randomFromAll($opt_list, $chosen_opt){
-    $rand_opt_index = array_rand($opt_list);
-    $rand_opt = $opt_list[$rand_opt_index];
-    return($rand_opt);
-}
-
 function randomCategorical($value_list) {
+    // You can change this to use randomFromRemaining() if you want that instead
     return randomFromAll($value_list, null);
 }
 
@@ -234,6 +227,17 @@ function flip_yesno($current_var) {
     } else {
         return("Yes");
     }
+}
+
+function randomFromAll($opt_list){
+    // Just takes a list with *all* options and removes the already-chosen one, then
+    // randomly selects from among the remaining options
+    // Since the RAND study draws two values *without replacement*, here we pretend that $suprespect is the
+    // already-chosen first value, so draw the second value uniformly from (sup_respect_opts)\(suprespect)
+    // (\ = set difference)
+    $rand_opt_index = array_rand($opt_list);
+    $rand_opt = $opt_list[$rand_opt_index];
+    return($rand_opt);
 }
 
 function randomFromRemaining($opt_list, $chosen_opt){

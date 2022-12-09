@@ -1,33 +1,33 @@
 <table style="border: 1px solid black;" id="offertable">
     <thead>
         <tr style="border: 1px solid black;" id="tableheader">
-            <th style="border: 1px solid black;">Characteristic</th>
-            <th style="border: 1px solid black;">Current Job</th>
-            <th style="border: 1px solid black;">Offered Job</th>
+            <th style="border: 1px solid black; font-weight: bold;">Characteristic</th>
+            <th style="border: 1px solid black; font-weight: bold;">Current Job: ${e://Field/entered_jobtitle}</th>
+            <th style="border: 1px solid black; font-weight: bold;">Offered Job: ${e://Field/generated_jobtitle_01}</th>
         </tr>
     </thead>
     <tbody>
-        <tr>
+        <tr class="compare-row">
             <td>${e://Field/name_01_01}</td>
             <td>${e://Field/cur_01_01}</td>
             <td>${e://Field/val_01_01}</td>
         </tr>
-        <tr>
+        <tr class="compare-row">
             <td>${e://Field/name_01_02}</td>
             <td>${e://Field/cur_01_02}</td>
             <td>${e://Field/val_01_02}</td>
         </tr>
-        <tr>
+        <tr class="compare-row">
             <td>${e://Field/name_01_03}</td>
             <td>${e://Field/cur_01_03}</td>
             <td>${e://Field/val_01_03}</td>
         </tr>
-        <tr>
+        <tr class="compare-row">
             <td>${e://Field/name_01_04}</td>
             <td>${e://Field/cur_01_04}</td>
             <td>${e://Field/val_01_04}</td>
         </tr>
-        <tr>
+        <tr class="compare-row">
             <td>${e://Field/name_01_05}</td>
             <td>${e://Field/cur_01_05}</td>
             <td>${e://Field/val_01_05}</td>
