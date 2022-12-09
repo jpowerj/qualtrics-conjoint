@@ -1,9 +1,8 @@
 Qualtrics.SurveyEngine.addOnload(function () {
     /*Place your JavaScript here to run when the page loads*/
+    var highlightColor = "#FFFAAC";
     // Loop over table rows, highlighting them if the values differ
-    // Uncomment the following if you want a console message to make sure
-    // the code is running once the question is loaded
-    //console.log("Highlighting Table");
+    //console.log("table js");
     var table = document.getElementById("offertable");
     var trows = table.getElementsByTagName("tr");
     //console.dir(trows);
@@ -26,4 +25,20 @@ Qualtrics.SurveyEngine.addOnload(function () {
             } // End check if "compare-row" in classes
         } // End check if id is not "tableheader"
     } // End loop over table rows
+});
+
+// And this is to replace the variable names in the first column with
+// nicer labels
+Qualtrics.SurveyEngine.addOnReady(function () {
+    /*Place your JavaScript here to run when the page is fully displayed*/
+    jQuery("td:contains('wage')").text("Hourly Wage (USD)"); //row 1
+    jQuery("td:contains('commute')").text("Daily Commute"); //2
+    jQuery("td:contains('hrsweek')").text("Hours per Week"); //3
+    jQuery("td:contains('healthcare')").text("Healthcare?"); //4
+    jQuery("td:contains('lunch')").text("Lunch Break?"); //5
+});
+
+Qualtrics.SurveyEngine.addOnUnload(function () {
+    /*Place your JavaScript here to run when the page is unloaded*/
+
 });
